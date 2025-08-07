@@ -1,82 +1,113 @@
-const button = document.getElementById('startStopBtn');
-const progressBar = document.getElementById('progressBar');
-const timeDisplay = document.getElementById('timeDisplay');
-const remainingTimeDisplay = document.getElementById('remainingTimeDisplay');
-const endTimeDisplay = document.getElementById('endTimeDisplay');
-const targetHoursInput = document.getElementById('targetHours');
-const targetMinutesInput = document.getElementById('targetMinutes');
+// script.js
+const hoursInput = document.getElementById('hours');
+const minutesInput = document.getElementById('minutes');
 const startTimeInput = document.getElementById('startTimeInput');
+const button = document.getElementById('startStopButton');
+const startTimeDisplay = document.getElementById('startTimeDisplay');
+const endTimeDisplay = document.getElementById('endTimeDisplay');
+const remainingTimeDisplay = document.getElementById('remainingTimeDisplay');
+const progressBar = document.getElementById('progressBar');
 const themeToggle = document.getElementById('themeToggle');
 
 let startTime = null;
+let targetSeconds = 0;
 let intervalId = null;
 let isRunning = false;
-let targetSeconds = 0;
 
-// 時分秒に変換する関数
-function formatRemaining(seconds) {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m}分${s}秒`;
+function updateTimer() {
+  const now = new Date();
+  const elapsed = (now - startTime) / 1000;
+  const remaining = targetSeconds - elapsed;
+  const percent = Math.min((elapsed / targetSeconds) * 100, 100);
+
+  if (remaining <= 0) {
+    clearInterval(intervalId);
+    progressBar.style.width = '100%';
+    remainingTimeDisplay.textContent = '時間終了！';
+    isRunning = false;
+    button.textContent = 'スタート';
+    localStorage.clear();
+    return;
+  }
+
+  progressBar.style.width = `${percent}%`;
+
+  const min = Math.floor(remaining / 60);
+  const sec = Math.floor(remaining % 60);
+  remainingTimeDisplay.textContent = `残り時間: ${min}分${sec}秒`;
+
+  // 保存
+  localStorage.setItem('startTime', startTime.getTime());
+  localStorage.setItem('targetSeconds', targetSeconds.toString());
+  localStorage.setItem('isRunning', isRunning.toString());
 }
 
 button.addEventListener('click', () => {
   if (!isRunning) {
-    // 初回スタート
-    const h = parseInt(targetHoursInput.value) || 0;
-    const m = parseInt(targetMinutesInput.value) || 0;
-    targetSeconds = h * 3600 + m * 60;
+    let hours = parseInt(hoursInput.value) || 0;
+    let minutes = parseInt(minutesInput.value) || 0;
+    targetSeconds = hours * 3600 + minutes * 60;
 
-    if (targetSeconds <= 0) {
-      alert("目標時間を指定してください");
-      return;
-    }
-
-    const now = new Date();
-    if (!startTimeInput.value) {
-      // startTimeInputが空なら現在時刻を自動設定
-      startTimeInput.value = now.toTimeString().slice(0, 5);
-    }
-
-    // 入力された開始時刻を基準にする
-    const [sh, sm] = startTimeInput.value.split(':').map(Number);
-    startTime = new Date();
-    startTime.setHours(sh, sm, 0, 0);
-
-    const endTime = new Date(startTime.getTime() + targetSeconds * 1000);
-    endTimeDisplay.textContent = `終了予定時刻: ${endTime.toTimeString().slice(0, 5)}`;
-
-    intervalId = setInterval(() => {
+    const inputTime = startTimeInput.value;
+    if (inputTime) {
+      const [h, m] = inputTime.split(":").map(Number);
       const now = new Date();
-      const elapsed = Math.floor((now - startTime.getTime()) / 1000);
-      const remaining = Math.max(targetSeconds - elapsed, 0);
-      const progress = Math.min((elapsed / targetSeconds) * 100, 100);
-
-      progressBar.style.width = `${progress}%`;
-      timeDisplay.textContent = `経過時間: ${elapsed} 秒`;
-      remainingTimeDisplay.textContent = `残り時間: ${formatRemaining(remaining)}`;
-
-      if (elapsed >= targetSeconds) {
-        clearInterval(intervalId);
-        isRunning = false;
-        button.textContent = 'スタート';
-      }
-    }, 100);
+      now.setHours(h);
+      now.setMinutes(m);
+      now.setSeconds(0);
+      startTime = now;
+    } else {
+      startTime = new Date();
+      startTimeInput.value = startTime.toTimeString().slice(0, 5);
+    }
 
     isRunning = true;
     button.textContent = 'ストップ';
 
+    startTimeDisplay.textContent = `開始時刻: ${startTime.toTimeString().slice(0, 5)}`;
+
+    const endTime = new Date(startTime.getTime() + targetSeconds * 1000);
+    endTimeDisplay.textContent = `終了予定時刻: ${endTime.toTimeString().slice(0, 5)}`;
+
+    updateTimer();
+    intervalId = setInterval(updateTimer, 100);
   } else {
     clearInterval(intervalId);
     isRunning = false;
     button.textContent = 'スタート';
+    localStorage.clear();
   }
 });
 
-// テーマ切り替え
+// ダークモード切り替え
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
-  themeToggle.textContent = document.body.classList.contains('dark')
-    ? '☀️ ライトモード'
-    : '🌙 ダークモード';
+  const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+  localStorage.setItem('theme', currentTheme);
+});
+
+// 起動時の状態復元
+window.addEventListener('load', () => {
+  const savedStartTime = localStorage.getItem('startTime');
+  const savedTargetSeconds = localStorage.getItem('targetSeconds');
+  const savedIsRunning = localStorage.getItem('isRunning');
+  const savedTheme = localStorage.getItem('theme');
+
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark');
+  }
+
+  if (savedStartTime && savedTargetSeconds && savedIsRunning === 'true') {
+    startTime = new Date(parseInt(savedStartTime));
+    targetSeconds = parseInt(savedTargetSeconds);
+    isRunning = true;
+
+    const endTime = new Date(startTime.getTime() + targetSeconds * 1000);
+    endTimeDisplay.textContent = `終了予定時刻: ${endTime.toTimeString().slice(0, 5)}`;
+    startTimeDisplay.textContent = `開始時刻: ${startTime.toTimeString().slice(0, 5)}`;
+    startTimeInput.value = startTime.toTimeString().slice(0, 5);
+    button.textContent = 'ストップ';
+
+    intervalId = setInterval(updateTimer, 100);
+  }
 });
