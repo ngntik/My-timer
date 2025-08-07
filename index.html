@@ -1,39 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>時間計測アプリ</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タイマーアプリ</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button id="themeToggle" class="theme-toggle">🌙 ダークモード</button>
-
-  <div class="container">
-    <h1>時間計測アプリ</h1>
-
-    <label>目標時間: 
-      <input type="number" id="targetHours" min="3" placeholder="時" style="width: 60px;"> 時
-      <input type="number" id="targetMinutes" min="0" max="59" placeholder="分" style="width: 60px;"> 分
-    </label>
-    <br><br>
-
-    <label>開始時刻: 
-      <input type="time" id="startTimeInput">
-    </label>
-    <br><br>
-
-    <button id="startStopBtn">スタート</button>
-
-    <div class="progress-container">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-
-    <p id="timeDisplay">経過時間: 0 秒</p>
-    <p id="remainingTimeDisplay">残り時間: -</p>
-    <p id="endTimeDisplay">終了予定時刻: -</p>
+  <button id="themeToggle">🌙 ダークモード</button>
+  <h1>タイマーアプリ</h1>
+  <label>開始時刻:
+    <input type="time" id="startTimeInput">
+  </label>
+  <label>目標時間:
+    <input type="number" id="hours" placeholder="時間" min="0"> 時間
+    <input type="number" id="minutes" placeholder="分" min="0" max="59"> 分
+  </label>
+  <button id="startStopButton">スタート</button>
+  <p id="startTimeDisplay"></p>
+  <p id="endTimeDisplay"></p>
+  <p id="remainingTimeDisplay"></p>
+  <div class="progress-container">
+    <div id="progressBar" class="progress-bar"></div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
