@@ -1,100 +1,34 @@
 body {
   font-family: sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  margin: 0;
-  padding: 0;
+  padding: 2em;
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.container {
-  max-width: 500px;
-  margin: 80px auto;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-input {
-  padding: 5px;
-  margin: 5px 0;
-}
-
-button {
-  padding: 8px 20px;
-  background-color: #1976d2;
+.dark {
+  background-color: #121212;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
 
-button:hover {
-  background-color: #1565c0;
+label, input, button {
+  display: block;
+  margin: 1em 0;
 }
 
 .progress-container {
   width: 100%;
   height: 20px;
-  background-color: #ddd;
-  border-radius: 10px;
-  margin: 20px 0;
+  background: #ddd;
+  margin-top: 1em;
 }
 
 .progress-bar {
   height: 100%;
+  background: green;
   width: 0%;
-  background-color: #4caf50;
-  border-radius: 10px;
-  transition: width 0.2s ease;
 }
 
-/* ダークモード用スタイル */
-body.dark {
-  background-color: #121212;
-  color: #eee;
-}
-
-body.dark .container {
-  background-color: #1e1e1e;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
-}
-
-body.dark input,
-body.dark input[type="time"] {
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #555;
-}
-
-body.dark button {
-  background-color: #444;
-  color: #fff;
-}
-
-body.dark .progress-container {
-  background-color: #555;
-}
-
-body.dark .progress-bar {
-  background-color: #4caf50;
-}
-
-/* トグルボタン */
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 6px 12px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
+button {
+  padding: 0.5em 1em;
 }
