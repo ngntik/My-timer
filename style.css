@@ -1,38 +1,41 @@
 body {
   font-family: sans-serif;
   background-color: #f4f4f4;
-  padding: 20px;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  max-width: 400px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 80px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-label, input, button {
+label {
   display: block;
-  width: 100%;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 input {
-  padding: 8px;
-  font-size: 16px;
+  padding: 5px;
+  margin: 5px 0;
 }
 
 button {
-  padding: 10px;
-  font-size: 16px;
-  background-color: #0066cc;
+  padding: 8px 20px;
+  background-color: #1976d2;
   color: white;
   border: none;
-  border-radius: 6px;
-  margin-top: 15px;
+  border-radius: 5px;
   cursor: pointer;
+}
+
+button:hover {
+  background-color: #1565c0;
 }
 
 .progress-container {
@@ -40,13 +43,58 @@ button {
   height: 20px;
   background-color: #ddd;
   border-radius: 10px;
-  overflow: hidden;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .progress-bar {
   height: 100%;
   width: 0%;
-  background-color: #00b894;
-  transition: width 0.1s;
+  background-color: #4caf50;
+  border-radius: 10px;
+  transition: width 0.2s ease;
+}
+
+/* ダークモード用スタイル */
+body.dark {
+  background-color: #121212;
+  color: #eee;
+}
+
+body.dark .container {
+  background-color: #1e1e1e;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+body.dark input,
+body.dark input[type="time"] {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+body.dark button {
+  background-color: #444;
+  color: #fff;
+}
+
+body.dark .progress-container {
+  background-color: #555;
+}
+
+body.dark .progress-bar {
+  background-color: #4caf50;
+}
+
+/* トグルボタン */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 6px 12px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
 }
