@@ -4,22 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>時間計測アプリ</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <button id="themeToggle" class="theme-toggle">🌙 ダークモード</button>
+
   <div class="container">
     <h1>時間計測アプリ</h1>
 
-    <label for="targetTime">目標時間（秒）:</label>
-    <input type="number" id="targetTime" value="60" min="1"/>
+    <label>目標時間: 
+      <input type="number" id="targetHours" min="0" placeholder="時" style="width: 60px;"> 時
+      <input type="number" id="targetMinutes" min="0" max="59" placeholder="分" style="width: 60px;"> 分
+    </label>
+    <br><br>
+
+    <label>開始時刻: 
+      <input type="time" id="startTimeInput">
+    </label>
+    <br><br>
+
+    <button id="startStopBtn">スタート</button>
 
     <div class="progress-container">
       <div class="progress-bar" id="progressBar"></div>
     </div>
 
     <p id="timeDisplay">経過時間: 0 秒</p>
-
-    <button id="startStopButton">スタート</button>
+    <p id="remainingTimeDisplay">残り時間: -</p>
+    <p id="endTimeDisplay">終了予定時刻: -</p>
   </div>
 
   <script src="script.js"></script>
