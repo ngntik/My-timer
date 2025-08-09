@@ -15,35 +15,47 @@
     
     <!-- アプリのメインタイトル -->
     <h1>タイマーアプリ</h1>
+    <div class="timer-info">
+      <!-- 開始時刻設定用の入力フィールド -->
+      <label>開始時刻:
+        <input type="time" id="startTimeInput">
+      </label>
+      
+      <!-- 目標時間設定用の入力フィールド（時間と分） -->
+      <label>目標時間:
+        <input type="number" id="hours" placeholder="時間" min="0"> :
+        <input type="number" id="minutes" placeholder="分" min="0" max="59">
+      </label>
+    </div>
     
-    <!-- 開始時刻設定用の入力フィールド -->
-    <label>開始時刻:
-      <input type="time" id="startTimeInput">
-    </label>
-    
-    <!-- 目標時間設定用の入力フィールド（時間と分） -->
-    <label>目標時間:
-      <input type="number" id="hours" placeholder="時間" min="0"> :
-      <input type="number" id="minutes" placeholder="分" min="0" max="59">
-    </label>
+    <!-- プリセット時間設定ボタン -->
+    <div class="preset-buttons">
+      <button class="preset-btn" data-minutes="3">3分</button>
+      <button class="preset-btn" data-minutes="5">5分</button>
+      <button class="preset-btn" data-minutes="25">25分</button>
+      <button class="preset-btn" data-minutes="515">8時間35分</button>
+
+    </div>
     
     <!-- タイマーの開始/停止ボタン -->
-    <button id="startStopButton">スタート</button>
+    <div class="control-buttons">
+      <button id="startStopButton">スタート</button>
+      <button id="resetButton">リセット</button>
+    </div>
     
     <!-- タイマー情報表示エリア -->
-    
-    
-    
-    
 
-    <div class="progress-div">
+    <div class="progress-info">
       <p id="startTimeDisplay"></p>        <!-- 実際の開始時刻表示 -->
+      
       <!-- プログレスバー表示用のコンテナ -->
       <div class="progress-container">
         <div id="progressBar" class="progress-bar"></div>
       </div>
+
       <p id="endTimeDisplay"></p>          <!-- 終了予定時刻表示 -->
     </div>
+    
     <p id="remainingTimeDisplay"></p>    <!-- 残り時間表示 -->
   </div>
   

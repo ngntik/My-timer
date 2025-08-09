@@ -23,7 +23,7 @@ h1 {
 
 label {
   display: block;
-  margin: 10px 0;
+  margin: 5px 0;
   font-size: 14px;
 }
 
@@ -61,7 +61,70 @@ button:active {
   transform: scale(0.97);
 }
 
-.progress-div {
+.timer-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  padding: 0 15%;
+}
+
+.timer-info label {
+  text-align: left;
+}
+
+/* プリセットボタンのスタイル */
+.preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+  justify-content: center;
+}
+
+.preset-btn {
+  background: #f0f4f8;
+  color: #333;
+  border: 2px solid #d0d7de;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 60px;
+}
+
+.preset-btn:hover {
+  background: #e3e8ee;
+  border-color: #a3d5ff;
+}
+
+.preset-btn:active {
+  transform: scale(0.95);
+}
+
+/* コントロールボタン（スタート/ストップ、リセット）のレイアウト */
+.control-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+/* リセットボタンのスタイル */
+#resetButton {
+  background: #ffb3b3; /* 淡い赤色 */
+  color: #333;
+}
+
+#resetButton:hover {
+  background: #ff9999;
+}
+
+#resetButton:active {
+  transform: scale(0.97);
+}
+
+.progress-info {
   display: flex;
   align-items: center;
 }
@@ -121,4 +184,26 @@ p {
 
 .dark-mode #progress {
   background: #6fcf97;
+}
+
+/* ダークモード時のプリセットボタン */
+.dark-mode .preset-btn {
+  background: #3a3a3a;
+  color: #eaeaea;
+  border-color: #555;
+}
+
+.dark-mode .preset-btn:hover {
+  background: #4a4a4a;
+  border-color: #5fa8d3;
+}
+
+/* ダークモード時のリセットボタン */
+.dark-mode #resetButton {
+  background: #8b4444; /* ダークモード用の暗い赤色 */
+  color: #eaeaea;
+}
+
+.dark-mode #resetButton:hover {
+  background: #a55555;
 }
