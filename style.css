@@ -61,16 +61,17 @@ button:active {
   transform: scale(0.97);
 }
 
-#progress-container {
-  width: 100%;
+.progress-container {
+  width: 70%;
   height: 16px;
   background: #e3e8ee;
   border-radius: 12px;
-  margin: 20px 0;
+  margin: 0 auto;
   overflow: hidden;
+
 }
 
-#progress {
+.progress-bar {
   height: 100%;
   width: 0%;
   background: #7cd992; /* 淡いグリーン */

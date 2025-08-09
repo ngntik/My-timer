@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- 文字エンコーディングとレスポンシブ対応の基本設定 -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>タイマーアプリ</title>
+  <!-- 外部CSSファイルを読み込み -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button id="themeToggle">🌙 ダークモード</button>
-  <h1>タイマーアプリ</h1>
-  <label>開始時刻:
-    <input type="time" id="startTimeInput">
-  </label>
-  <label>目標時間:
-    <input type="number" id="hours" placeholder="時間" min="0"> 時間
-    <input type="number" id="minutes" placeholder="分" min="0" max="59"> 分
-  </label>
-  <button id="startStopButton">スタート</button>
-  <p id="startTimeDisplay"></p>
-  <p id="endTimeDisplay"></p>
-  <p id="remainingTimeDisplay"></p>
-  <div class="progress-container">
-    <div id="progressBar" class="progress-bar"></div>
+  <div class="container">
+    <!-- ダークモード/ライトモード切り替えボタン -->
+    <button id="themeToggle">🌙 ダークモード</button>
+    
+    <!-- アプリのメインタイトル -->
+    <h1>タイマーアプリ</h1>
+    
+    <!-- 開始時刻設定用の入力フィールド -->
+    <label>開始時刻:
+      <input type="time" id="startTimeInput">
+    </label>
+    
+    <!-- 目標時間設定用の入力フィールド（時間と分） -->
+    <label>目標時間:
+      <input type="number" id="hours" placeholder="時間" min="0"> 時間
+      <input type="number" id="minutes" placeholder="分" min="0" max="59"> 分
+    </label>
+    
+    <!-- タイマーの開始/停止ボタン -->
+    <button id="startStopButton">スタート</button>
+    
+    <!-- タイマー情報表示エリア -->
+    <p id="startTimeDisplay"></p>        <!-- 実際の開始時刻表示 -->
+    <p id="endTimeDisplay"></p>          <!-- 終了予定時刻表示 -->
+    <p id="remainingTimeDisplay"></p>    <!-- 残り時間表示 -->
+    
+    <!-- プログレスバー表示用のコンテナ -->
+    <div class="progress-container">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    
   </div>
+  
+  <!-- JavaScriptファイルを読み込み -->
   <script src="script.js"></script>
 </body>
 </html>
