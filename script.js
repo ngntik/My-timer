@@ -44,10 +44,11 @@ function updateTimer() {
   // プログレスバーの幅を更新
   progressBar.style.width = `${percent}%`;
 
-  // 残り時間を分と秒に変換して表示
-  const min = Math.floor(remaining / 60);           // 残り分数
+  // 残り時間を時間、分、秒に変換して表示
+  const hours = Math.floor(remaining / 3600);       // 残り時間数
+  const min = Math.floor((remaining % 3600) / 60);  // 残り分数（時間を除いた分）
   const sec = Math.floor(remaining % 60);           // 残り秒数
-  remainingTimeDisplay.textContent = `残り時間: ${min}分${sec}秒`;
+  remainingTimeDisplay.textContent = `残り時間: ${hours}時間${min}分${sec}秒`;
 
   // 状態をローカルストレージに保存（ブラウザ再読み込み時の復元用）
   localStorage.setItem('startTime', startTime.getTime());
@@ -86,11 +87,11 @@ button.addEventListener('click', () => {
     button.textContent = 'ストップ';                // ボタンテキストを「ストップ」に変更
 
     // 表示の更新
-    startTimeDisplay.textContent = `開始時刻: ${startTime.toTimeString().slice(0, 5)}`;
+    startTimeDisplay.textContent = `${startTime.toTimeString().slice(0, 5)}`;
 
     // 終了予定時刻を計算して表示
     const endTime = new Date(startTime.getTime() + targetSeconds * 1000);
-    endTimeDisplay.textContent = `終了予定時刻: ${endTime.toTimeString().slice(0, 5)}`;
+    endTimeDisplay.textContent = `${endTime.toTimeString().slice(0, 5)}`;
 
     // タイマーの開始（初回実行 + 100msごとの定期実行）
     updateTimer();                                 // 即座に一度実行
@@ -134,8 +135,8 @@ window.addEventListener('load', () => {
 
     // 画面表示の復元
     const endTime = new Date(startTime.getTime() + targetSeconds * 1000);
-    endTimeDisplay.textContent = `終了予定時刻: ${endTime.toTimeString().slice(0, 5)}`;
-    startTimeDisplay.textContent = `開始時刻: ${startTime.toTimeString().slice(0, 5)}`;
+    endTimeDisplay.textContent = `${endTime.toTimeString().slice(0, 5)}`;
+    startTimeDisplay.textContent = `${startTime.toTimeString().slice(0, 5)}`;
     startTimeInput.value = startTime.toTimeString().slice(0, 5);
     button.textContent = 'ストップ';
 

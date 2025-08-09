@@ -23,23 +23,28 @@
     
     <!-- 目標時間設定用の入力フィールド（時間と分） -->
     <label>目標時間:
-      <input type="number" id="hours" placeholder="時間" min="0"> 時間
-      <input type="number" id="minutes" placeholder="分" min="0" max="59"> 分
+      <input type="number" id="hours" placeholder="時間" min="0"> :
+      <input type="number" id="minutes" placeholder="分" min="0" max="59">
     </label>
     
     <!-- タイマーの開始/停止ボタン -->
     <button id="startStopButton">スタート</button>
     
     <!-- タイマー情報表示エリア -->
-    <p id="startTimeDisplay"></p>        <!-- 実際の開始時刻表示 -->
-    <p id="endTimeDisplay"></p>          <!-- 終了予定時刻表示 -->
-    <p id="remainingTimeDisplay"></p>    <!-- 残り時間表示 -->
     
-    <!-- プログレスバー表示用のコンテナ -->
-    <div class="progress-container">
-      <div id="progressBar" class="progress-bar"></div>
+    
+    
+    
+
+    <div class="progress-div">
+      <p id="startTimeDisplay"></p>        <!-- 実際の開始時刻表示 -->
+      <!-- プログレスバー表示用のコンテナ -->
+      <div class="progress-container">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+      <p id="endTimeDisplay"></p>          <!-- 終了予定時刻表示 -->
     </div>
-    
+    <p id="remainingTimeDisplay"></p>    <!-- 残り時間表示 -->
   </div>
   
   <!-- JavaScriptファイルを読み込み -->
