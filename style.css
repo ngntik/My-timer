@@ -61,7 +61,7 @@ button:active {
   transform: scale(0.97);
 }
 
-.progress-div {
+.timer-info {
   display: flex;
   align-items: center;
 }
