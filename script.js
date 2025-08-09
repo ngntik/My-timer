@@ -8,6 +8,7 @@ const startTimeInput = document.getElementById('startTimeInput'); // 開始時�
 
 // ボタン要素の取得
 const button = document.getElementById('startStopButton');     // スタート/ストップボタン
+const resetButton = document.getElementById('resetButton');    // リセットボタン
 const themeToggle = document.getElementById('themeToggle');    // テーマ切り替えボタン
 
 // 表示用要素の取得
@@ -103,6 +104,67 @@ button.addEventListener('click', () => {
     button.textContent = 'スタート';                // ボタンテキストを「スタート」に戻す
     localStorage.clear();                          // ローカルストレージをクリア
   }
+});
+
+// ===== リセットボタンのイベントリスナー =====
+resetButton.addEventListener('click', () => {
+  // タイマーが動作中の場合は停止
+  if (isRunning) {
+    clearInterval(intervalId);
+    isRunning = false;
+  }
+  
+  // 全ての状態をリセット
+  startTime = null;
+  targetSeconds = 0;
+  intervalId = null;
+  
+  // 入力フィールドをクリア
+  hoursInput.value = '';
+  minutesInput.value = '';
+  startTimeInput.value = '';
+  
+  // 表示をクリア
+  startTimeDisplay.textContent = '';
+  endTimeDisplay.textContent = '';
+  remainingTimeDisplay.textContent = '';
+  
+  // プログレスバーをリセット
+  progressBar.style.width = '0%';
+  
+  // ボタンテキストを初期状態に戻す
+  button.textContent = 'スタート';
+  
+  // ローカルストレージをクリア
+  localStorage.removeItem('startTime');
+  localStorage.removeItem('targetSeconds');
+  localStorage.removeItem('isRunning');
+  
+  // リセットボタンの視覚的フィードバック
+  resetButton.style.backgroundColor = '#ff9999';
+  setTimeout(() => {
+    resetButton.style.backgroundColor = '';
+  }, 200);
+});
+
+// ===== プリセット時間設定機能 =====
+// 全てのプリセットボタンにイベントリスナーを追加
+document.querySelectorAll('.preset-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const totalMinutes = parseInt(button.dataset.minutes); // data-minutes属性から分数を取得
+    const hours = Math.floor(totalMinutes / 60);           // 時間を計算
+    const minutes = totalMinutes % 60;                     // 分を計算
+    
+    // 入力フィールドに値を設定
+    hoursInput.value = hours;
+    minutesInput.value = minutes;
+    
+    // ボタンのアクティブ状態を視覚的に表示（一時的なハイライト）
+    button.style.backgroundColor = '#7cd992';
+    setTimeout(() => {
+      button.style.backgroundColor = '';
+    }, 200);
+  });
 });
 
 // ===== ダークモード切り替え機能 =====
