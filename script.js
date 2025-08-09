@@ -106,8 +106,8 @@ button.addEventListener('click', () => {
 
 // ===== ダークモード切り替え機能 =====
 themeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('dark');           // 'dark'クラスの切り替え
-  const currentTheme = document.body.classList.contains('dark') ? 'dark' : 'light'; // 現在のテーマを判定
+  document.body.classList.toggle('dark-mode');           // 'dark'クラスの切り替え
+  const currentTheme = document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode'; // 現在のテーマを判定
   localStorage.setItem('theme', currentTheme);      // テーマ設定をローカルストレージに保存
 });
 
